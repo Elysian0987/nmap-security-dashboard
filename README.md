@@ -37,7 +37,7 @@ You must have the following installed on your system:
 ### Installation & Running
 1.  **Clone the repository:**
     ```bash
-    git clone https://github.com/your-username/nmap-security-dashboard.git
+    git clone https://github.com/Elysian0987/nmap-security-dashboard.git
     cd nmap-security-dashboard
     ```
 
