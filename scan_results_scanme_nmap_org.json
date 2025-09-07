@@ -1,0 +1,32 @@
+[
+  {
+    "port": "21/tcp",
+    "state": "open",
+    "service": "ftp"
+  },
+  {
+    "port": "22/tcp",
+    "state": "open",
+    "service": "ssh"
+  },
+  {
+    "port": "80/tcp",
+    "state": "open",
+    "service": "http"
+  },
+  {
+    "port": "110/tcp",
+    "state": "open",
+    "service": "pop3"
+  },
+  {
+    "port": "554/tcp",
+    "state": "open",
+    "service": "rtsp"
+  },
+  {
+    "port": "1723/tcp",
+    "state": "open",
+    "service": "pptp"
+  }
+]
