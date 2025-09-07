@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF--8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Automated Security Sentinel</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; background-color: #f0f2f5; color: #1c1e21; padding: 20px; }
+        .container { max-width: 800px; margin: auto; background-color: #fff; padding: 20px; border-radius: 8px; box-shadow: 0 2px 4px rgba(0,0,0,0.1); }
+        h1 { color: #1877f2; }
+        input[type="text"] { width: 70%; padding: 8px; border-radius: 6px; border: 1px solid #ddd; }
+        button { padding: 8px 15px; border-radius: 6px; border: none; background-color: #1877f2; color: white; font-weight: bold; cursor: pointer; }
+        button:hover { background-color: #166fe5; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { text-align: left; padding: 12px; border-bottom: 1px solid #ddd; }
+        th { background-color: #f5f6f7; }
+        #results-tbody tr:hover { background-color: #f5f6f7; }
+        .loader { font-style: italic; color: #606770; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Automated Security Sentinel</h1>
+        <p>Enter a target URL to scan for open ports.</p>
+        <div>
+            <input type="text" id="target-input" placeholder="e.g., scanme.nmap.org">
+            <button id="scan-button">Scan Target</button>
+        </div>
+
+        <table id="results-table">
+            <thead>
+                <tr>
+                    <th>Port / Protocol</th>
+                    <th>State</th>
+                    <th>Service</th>
+                </tr>
+            </thead>
+            <tbody id="results-tbody">
+                </tbody>
+        </table>
+    </div>
+
+    <script>
+        const scanButton = document.getElementById('scan-button');
+        const targetInput = document.getElementById('target-input');
+        const resultsTbody = document.getElementById('results-tbody');
+
+        scanButton.addEventListener('click', () => {
+            const target = targetInput.value;
+            if (!target) {
+                alert('Please enter a target URL.');
+                return;
+            }
+
+            // 1. Clear old results and show a loading message
+            resultsTbody.innerHTML = '<tr><td colspan="3" class="loader">Scanning... please wait. This can take a moment.</td></tr>';
+
+            // 2. Construct the full API URL and call it
+            const apiUrl = `http://127.0.0.1:8000/scan/${target}`;
+            
+            fetch(apiUrl)
+                .then(response => response.json()) // Get the JSON from the response
+                .then(data => {
+                    // 3. Clear the "Loading..." message
+                    resultsTbody.innerHTML = ''; 
+
+                    if (data.error) {
+                         resultsTbody.innerHTML = `<tr><td colspan="3" style="color:red;">Error: ${data.error}</td></tr>`;
+                         return;
+                    }
+                    if (data.length === 0) {
+                        resultsTbody.innerHTML = `<tr><td colspan="3">No open ports found.</td></tr>`;
+                        return;
+                    }
+
+                    // 4. Loop through the data and build the table
+                    data.forEach(portInfo => {
+                        const row = document.createElement('tr');
+                        row.innerHTML = `
+                            <td>${portInfo.port}</td>
+                            <td>${portInfo.state}</td>
+                            <td>${portInfo.service}</td>
+                        `;
+                        resultsTbody.appendChild(row);
+                    });
+                })
+                .catch(error => {
+                    resultsTbody.innerHTML = '';
+                    console.error('Error:', error);
+                    resultsTbody.innerHTML = `<tr><td colspan="3" style="color:red;">Failed to connect to the API. Is the Python server running?</td></tr>`;
+                });
+        });
+    </script>
+
+</body>
+</html>
