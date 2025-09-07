@@ -72,9 +72,9 @@ You must have the following installed on your system:
 The API has one main endpoint for initiating scans.
 
 ### `GET /scan/{target_url}`
-Runs a fast Nmap scan (`-F`) on the specified target and returns a JSON array of open ports.
-
-* **Example Request:** `http://127.0.0.1:8000/scan/scanme.nmap.org`
+- **Action:** Runs a fast Nmap scan (`-F`) on the specified target
+- **Returns:** JSON array of open ports  
+- **Example:** `/scan/scanme.nmap.org`
 
 ---
 
