@@ -88,3 +88,5 @@ def scan_target(target_url: str, request: Request):
             
     # The API endpoint returns the final list. FastAPI automatically converts it to JSON.
     return open_ports
+
+#uvicorn main:app --reload

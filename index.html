@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF--8">
+    <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Automated Security Sentinel</title>
     <style>
@@ -61,8 +61,8 @@
             resultsTbody.innerHTML = '<tr><td colspan="3" class="loader">Scanning... please wait. This can take a moment.</td></tr>';
 
             // 2. Construct the full API URL and call it
-            // const apiUrl = `/scan/${target}`;
-            const apiUrl = `https://nmap-security-dashboard.onrender.com/scan/${target}`;
+             <!-- const apiUrl = `/scan/${target}`; -->
+            const apiUrl = `https://nmap-security-dashboard.onrender.com/scan/${target}`; 
             fetch(apiUrl)
                 .then(response => response.json()) // Get the JSON from the response
                 .then(data => {
@@ -92,7 +92,13 @@
                 .catch(error => {
                     resultsTbody.innerHTML = '';
                     console.error('Error:', error);
-                    resultsTbody.innerHTML = `<tr><td colspan="3" style="color:red;">Failed to connect to the API. Is the Python server running?</td></tr>`;
+                    resultsTbody.innerHTML = `
+                        <tr>
+                            <td colspan="3" class="loader" style="text-align: center;">
+                                Live server is offline. Please download the project from GitHub and run it locally to use the scanner.
+                            </td>
+                        </tr>
+                    `;
                 });
         });
     </script>
