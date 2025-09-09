@@ -28,6 +28,10 @@
             <button id="scan-button">Scan Target</button>
         </div>
 
+        <p style="font-size: 12px; color: #606770; margin-top: 15px;">
+            <strong>Disclaimer:</strong> This tool is for educational purposes only. Only scan targets you have explicit permission to test. By using this tool, you agree to take full responsibility for your actions.
+        </p>
+
         <table id="results-table">
             <thead>
                 <tr>
@@ -57,8 +61,8 @@
             resultsTbody.innerHTML = '<tr><td colspan="3" class="loader">Scanning... please wait. This can take a moment.</td></tr>';
 
             // 2. Construct the full API URL and call it
-            const apiUrl = `/scan/${target}`;
-            
+            // const apiUrl = `/scan/${target}`;
+            const apiUrl = `https://nmap-security-dashboard.onrender.com/scan/${target}`;
             fetch(apiUrl)
                 .then(response => response.json()) // Get the JSON from the response
                 .then(data => {
