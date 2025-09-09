@@ -5,6 +5,9 @@
 
 By using this software, you agree that the author and any contributors are not liable for any misuse or damage caused. You are solely responsible for your actions and for complying with all applicable laws. The software is provided "as is," without warranty of any kind.
 
+<img width="1027" height="610" alt="Screenshot 2025-09-07 180225" src="https://github.com/user-attachments/assets/37996799-6c3f-4207-af3d-de5f49e089a9" />
+
+
 ---
 
 A web-based dashboard built with Python and FastAPI to run live Nmap port scans and visualize the results in real-time.
